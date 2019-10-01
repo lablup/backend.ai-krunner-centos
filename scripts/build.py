@@ -8,14 +8,15 @@ import pkg_resources
 import click
 
 
-distro = 'centos7.6'
-
-
 @click.command()
-def main():
+@click.argument('distro', default='centos7.6')
+def main(distro):
     '''
     Build the kernel runner environment containers and tar archives which provides the /opt/backend.ai
     volume to all other kernel contaienrs.
+
+    \b
+    DISTRO: Set the distro version to build. (Available: centos6.10, centos7.6)
     '''
     base_path = Path(pkg_resources.resource_filename('ai.backend.krunner.centos', '.'))
     click.secho(f'Building Python for krunner for {distro}', fg='yellow', bold=True)
